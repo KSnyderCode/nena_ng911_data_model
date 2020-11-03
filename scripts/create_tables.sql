@@ -173,10 +173,10 @@ create table ng911.addresspoints (
 
 comment on table ng911.addresspoints is 'Site/Structure Address Points ideally represent the location of a site or structure or the location of access to a site or structure. Site/Structure Address Points can also represent landmarks.'; 
 comment on column ng911.addresspoints.id is 'Primary Key'; 
-comment on column ng911.addresspoints.discrpagid is '
-comment on column ng911.addresspoints.dateupdate is ' 
-comment on column ng911.addresspoints.effective is ' 
-comment on column ng911.addresspoints.expire is ' 
+comment on column ng911.addresspoints.discrpagid is 'Discrepancy Agency ID'; 
+comment on column ng911.addresspoints.dateupdate is 'Date Updated'; 
+comment on column ng911.addresspoints.effective is 'Effective Date'; 
+comment on column ng911.addresspoints.expire is 'Expiration Date';  
 comment on column ng911.addresspoints.site_nguid is ' 
 comment on column ng911.addresspoints.country is '
 comment on column ng911.addresspoints.state is '

@@ -177,45 +177,79 @@ comment on column ng911.addresspoints.discrpagid is 'Discrepancy Agency ID';
 comment on column ng911.addresspoints.dateupdate is 'Date Updated'; 
 comment on column ng911.addresspoints.effective is 'Effective Date'; 
 comment on column ng911.addresspoints.expire is 'Expiration Date';  
-comment on column ng911.addresspoints.site_nguid is ' 
-comment on column ng911.addresspoints.country is '
-comment on column ng911.addresspoints.state is '
-comment on column ng911.addresspoints.county is '
-comment on column ng911.addresspoints.addcode is '
-comment on column ng911.addresspoints.adddatauri is '
-comment on column ng911.addresspoints.inc_muni is '
-comment on column ng911.addresspoints.uninc_comm is '
-comment on column ng911.addresspoints.nbrhd_comm is '
-comment on column ng911.addresspoints.addnum_pre is '
-comment on column ng911.addresspoints.add_number is '
-comment on column ng911.addresspoints.addnum_suf is '
-comment on column ng911.addresspoints.st_premod is '
-comment on column ng911.addresspoints.st_predir is '
-comment on column ng911.addresspoints.st_pretyp is '
-comment on column ng911.addresspoints.st_presep is '
-comment on column ng911.addresspoints.st_name is '
-comment on column ng911.addresspoints.st_postyp is '
-comment on column ng911.addresspoints.st_posdir is '
-comment on column ng911.addresspoints.st_posmod is '
-comment on column ng911.addresspoints.lst_predir is '
-comment on column ng911.addresspoints.lst_name is '
-comment on column ng911.addresspoints.lst_type is '
-comment on column ng911.addresspoints.lst_posdir is '
-comment on column ng911.addresspoints.esn is '
-comment on column ng911.addresspoints.msagcomm is '
-comment on column ng911.addresspoints.post_comm is '
-comment on column ng911.addresspoints.post_code is '
-comment on column ng911.addresspoints.post_code4 is '
-comment on column ng911.addresspoints.building is '
-comment on column ng911.addresspoints.floor is '
-comment on column ng911.addresspoints.unit is '
-comment on column ng911.addresspoints.room is '
-comment on column ng911.addresspoints.seat is '
-comment on column ng911.addresspoints.addtl_loc is '
-comment on column ng911.addresspoints.landmkname is '
-comment on column ng911.addresspoints.mile_post is '
-comment on column ng911.addresspoints.place_type is '
-comment on column ng911.addresspoints.placement is '
-comment on column ng911.addresspoints.long is '
-comment on column ng911.addresspoints.lat is '
-comment on column ng911.addresspoints.elev is '
+comment on column ng911.addresspoints.site_nguid is 'Site NENA Globally Unique ID';
+comment on column ng911.addresspoints.country is 'Country';
+comment on column ng911.addresspoints.state is 'State';
+comment on column ng911.addresspoints.county is 'County';
+comment on column ng911.addresspoints.addcode is 'Additional Code';
+comment on column ng911.addresspoints.adddatauri is 'Additional Data URI';
+comment on column ng911.addresspoints.inc_muni is 'Incorporated Municipality';
+comment on column ng911.addresspoints.uninc_comm is 'Unincorporated Community';
+comment on column ng911.addresspoints.nbrhd_comm is 'Neighborhood Community';
+comment on column ng911.addresspoints.addnum_pre is 'Address Number Prefix';
+comment on column ng911.addresspoints.add_number is 'Address Number';
+comment on column ng911.addresspoints.addnum_suf is 'Address Number Suffix';
+comment on column ng911.addresspoints.st_premod is 'Street Name Pre Modifier';
+comment on column ng911.addresspoints.st_predir is 'Street Name Pre Directional';
+comment on column ng911.addresspoints.st_pretyp is 'Street Name Pre Type';
+comment on column ng911.addresspoints.st_presep is 'Street Name Pre Type Separator';
+comment on column ng911.addresspoints.st_name is 'Street Name';
+comment on column ng911.addresspoints.st_postyp is 'Street Name Post Type';
+comment on column ng911.addresspoints.st_posdir is 'Street Name Post Directional';
+comment on column ng911.addresspoints.st_posmod is 'Street Name Post Modifier';
+comment on column ng911.addresspoints.lst_predir is 'Legacy Street Name Pre Directional';
+comment on column ng911.addresspoints.lst_name is 'Legacy Street Name';
+comment on column ng911.addresspoints.lst_type is 'Legacy Street Name Type';
+comment on column ng911.addresspoints.lst_posdir is 'Legacy Street Name Post Directional';
+comment on column ng911.addresspoints.esn is 'ESN';
+comment on column ng911.addresspoints.msagcomm is 'MSAG Community Name';
+comment on column ng911.addresspoints.post_comm is 'Postal Community Name';
+comment on column ng911.addresspoints.post_code is 'Postal Code';
+comment on column ng911.addresspoints.post_code4 is 'ZIP Plus 4';
+comment on column ng911.addresspoints.building is 'Building';
+comment on column ng911.addresspoints.floor is 'Floor';
+comment on column ng911.addresspoints.unit is 'Unit';
+comment on column ng911.addresspoints.room is 'Room';
+comment on column ng911.addresspoints.seat is 'Seat';
+comment on column ng911.addresspoints.addtl_loc is 'Additional Location Information';
+comment on column ng911.addresspoints.landmkname is 'Complete Landmark Name';
+comment on column ng911.addresspoints.mile_post is 'Mile Post';
+comment on column ng911.addresspoints.place_type is 'Place Type';
+comment on column ng911.addresspoints.placement is 'Placement Method';
+comment on column ng911.addresspoints.long is 'Longitude';
+comment on column ng911.addresspoints.lat is 'Latitude';
+comment on column ng911.addresspoints.elev is 'Elevation';
+
+/* Creating PSAP Boundary */
+
+create table ng911.psap_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        es_nguid char(254),
+        state char(2),
+        agency_id char(100),
+        serviceuri char(254),
+        serviceurn char(50),
+        servicenum char(15),
+        avcard_uri char(254),
+        dsplayname char(60)
+);
+
+comment on table ng911.psap_boundary is 'The primary use for the PSAP Boundary is to route call/emergency requests for NG9-1-1. This layer depicts the polygon(s) and related attribute information that defines the geographic area of all PSAP boundaries within a given 9-1-1 Authority’s geographic coverage area';
+comment on column ng911.psap_boundary.id is 'Primary Key'; 
+comment on column ng911.psap_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.psap_boundary.dateupdate is 'Date Updated';
+comment on column ng911.psap_boundary.effective is 'Effective Date';
+comment on column ng911.psap_boundary.expire is 'Expiration Date';
+comment on column ng911.psap_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
+comment on column ng911.psap_boundary.state is 'State';
+comment on column ng911.psap_boundary.agency_id is 'Agency ID';
+comment on column ng911.psap_boundary.serviceuri is 'Service URI';
+comment on column ng911.psap_boundary.serviceurn is 'Service URN';
+comment on column ng911.psap_boundary.servicenum is 'Service Number';
+comment on column ng911.psap_boundary.avcard_uri is 'Agency vCard URI';
+comment on column ng911.psap_boundary.dsplayname is 'Display Name';

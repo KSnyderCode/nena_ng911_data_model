@@ -253,3 +253,23 @@ comment on column ng911.psap_boundary.serviceurn is 'Service URN';
 comment on column ng911.psap_boundary.servicenum is 'Service Number';
 comment on column ng911.psap_boundary.avcard_uri is 'Agency vCard URI';
 comment on column ng911.psap_boundary.dsplayname is 'Display Name';
+
+/* Create emergency Service Boundary */ 
+
+create table nena.emergency_service_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        es_nguid char(254),
+        state char(2),
+        agency_id char(100),
+        serviceuri char(254),
+        serviceurn char(50),
+        servicenum char(15),
+        avcard_uri char(254),
+        dsplayname char(60)
+);
+

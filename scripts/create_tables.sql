@@ -256,7 +256,7 @@ comment on column ng911.psap_boundary.dsplayname is 'Display Name';
 
 /* Create emergency Service Boundary */ 
 
-create table nena.emergency_service_boundary as (
+create table ng911.emergency_service_boundary as (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid char(75),
@@ -272,4 +272,81 @@ create table nena.emergency_service_boundary as (
         avcard_uri char(254),
         dsplayname char(60)
 );
+
+comment on column ng911.psap_boundary.id is 'Primary Key'; 
+comment on column ng911.emergency_service_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.emergency_service_boundary.dateupdate is 'Date Updated';
+comment on column ng911.emergency_service_boundary.effective is 'Effective Date';
+comment on column ng911.emergency_service_boundary.expire is 'Expiration Date';
+comment on column ng911.emergency_service_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
+comment on column ng911.emergency_service_boundary.state is 'State';
+comment on column ng911.emergency_service_boundary.agency_id is 'Agency ID';
+comment on column ng911.emergency_service_boundary.serviceuri is 'Service URI';
+comment on column ng911.emergency_service_boundary.serviceurn is 'Service URN';
+comment on column ng911.emergency_service_boundary.servicenum is 'Service Number';
+comment on column ng911.emergency_service_boundary.avcard_uri is 'Agency vCard URI';
+comment on column ng911.emergency_service_boundary.dsplayname is 'Display Name';
+
+/* Create Provisioning Boundary */ 
+
+create table ng911.provisioning_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        pb_nguid char(254),
+);
+
+comment on column ng911.provisioning_boundary.id is 'Primary Key'; 
+comment on column ng911.provisioning_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.provisioning_boundary.dateupdate is 'Date Updated';
+comment on column ng911.provisioning_boundary.effective is 'Effective Date';
+comment on column ng911.provisioning_boundary.expire is 'Expiration Date';
+comment on column ng911.provisioning_boundary.pb_nguid is 'Expiration Date';
+
+/* Create Street Name Alias Table */
+
+create table nena.street_name_alias_tbl as (
+        id serial primary key,
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        ast_nguid char(254),
+        rcl_nguid char(254),
+        ast_premod char(15),
+        ast_predir char(9),
+        ast_pretyp char(50),
+        ast_presep char(20),
+        ast_name char(60),
+        ast_postyp char(50),
+        ast_posdir char(9),
+        ast_posmod char(25),
+        alstpredir char(2),
+        alstname char(75),
+        alsttyp char(4),
+        alstposdir char(2)
+);
+
+comment on column ng911.street_name_alias_tbl.id is 'Primary Key'; 
+comment on column ng911.street_name_alias_tbl.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.street_name_alias_tbl.dateupdate is 'Date Updated';
+comment on column ng911.street_name_alias_tbl.effective is 'Effective Date';
+comment on column ng911.street_name_alias_tbl.expire is 'Expiration Date';
+comment on column ng911.street_name_alias_tbl.ast_nguid is '
+comment on column ng911.street_name_alias_tbl.rcl_nguid is '
+comment on column ng911.street_name_alias_tbl.ast_premod is '
+comment on column ng911.street_name_alias_tbl.ast_predir is '
+comment on column ng911.street_name_alias_tbl.ast_pretyp is '
+comment on column ng911.street_name_alias_tbl.ast_presep is '
+comment on column ng911.street_name_alias_tbl.ast_name is '
+comment on column ng911.street_name_alias_tbl.ast_postyp is '
+comment on column ng911.street_name_alias_tbl.ast_posdir is '
+comment on column ng911.street_name_alias_tbl.ast_posmod is '
+comment on column ng911.street_name_alias_tbl.alstpredir is '
+comment on column ng911.street_name_alias_tbl.alstname is '
+comment on column ng911.street_name_alias_tbl.alsttyp is '
+comment on column ng911.street_name_alias_tbl.alstposdir is '
 

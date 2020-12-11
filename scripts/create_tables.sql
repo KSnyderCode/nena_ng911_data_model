@@ -350,8 +350,8 @@ comment on column ng911.street_name_alias_tbl.alstname is 'Alias Legacy Street N
 comment on column ng911.street_name_alias_tbl.alsttyp is 'Alias Legacy Street Name Type';
 comment on column ng911.street_name_alias_tbl.alstposdir is 'Alias Legacy Street Name Post';
 
-/*create landmark name table */ 
-create table nena.landmark_name_part_tbl as (
+/*create landmark name alias table */ 
+create table nena.landmark_name_alias as (
         id serial primary key,
         discrpagid char(75),
         dateupdate timestamp,
@@ -370,4 +370,19 @@ comment on column ng911.landmark_name_part_tbl.expire is 'Expire';
 comment on column ng911.landmark_name_part_tbl.ACLMNNGUID is 'ACLMNNGUID';
 comment on column ng911.landmark_name_part_tbl.Site_NGUID is 'Site_NGUID';
 comment on column ng911.landmark_name_part_tbl.ACLandmark is 'ACLandmark';
+
+/*create landmark name part table */ 
+
+create table nena.landmark_name_part_tbl as (
+        id serial primary key,
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        lmnp_nguid char(254),
+        site_nguid char(254),
+        aclmnnguid char(254),
+        lmnamepart char(150),
+        lmnp_order char(1)
+);
 

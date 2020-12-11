@@ -335,18 +335,39 @@ comment on column ng911.street_name_alias_tbl.discrpagid is 'Discrepancy Agency 
 comment on column ng911.street_name_alias_tbl.dateupdate is 'Date Updated';
 comment on column ng911.street_name_alias_tbl.effective is 'Effective Date';
 comment on column ng911.street_name_alias_tbl.expire is 'Expiration Date';
-comment on column ng911.street_name_alias_tbl.ast_nguid is '
-comment on column ng911.street_name_alias_tbl.rcl_nguid is '
-comment on column ng911.street_name_alias_tbl.ast_premod is '
-comment on column ng911.street_name_alias_tbl.ast_predir is '
-comment on column ng911.street_name_alias_tbl.ast_pretyp is '
-comment on column ng911.street_name_alias_tbl.ast_presep is '
-comment on column ng911.street_name_alias_tbl.ast_name is '
-comment on column ng911.street_name_alias_tbl.ast_postyp is '
-comment on column ng911.street_name_alias_tbl.ast_posdir is '
-comment on column ng911.street_name_alias_tbl.ast_posmod is '
-comment on column ng911.street_name_alias_tbl.alstpredir is '
-comment on column ng911.street_name_alias_tbl.alstname is '
-comment on column ng911.street_name_alias_tbl.alsttyp is '
-comment on column ng911.street_name_alias_tbl.alstposdir is '
+comment on column ng911.street_name_alias_tbl.ast_nguid is 'Alias Street Name NENA Globally Unique ID'; 
+comment on column ng911.street_name_alias_tbl.rcl_nguid is 'Road Centerline NENA Globally Unique';
+comment on column ng911.street_name_alias_tbl.ast_premod is 'Alias Street Name Pre Modifier';
+comment on column ng911.street_name_alias_tbl.ast_predir is 'Alias Street Name Pre Directional';
+comment on column ng911.street_name_alias_tbl.ast_pretyp is 'Alias Street Name Pre Type';
+comment on column ng911.street_name_alias_tbl.ast_presep is 'Alias Street Name Pre Type Separator';
+comment on column ng911.street_name_alias_tbl.ast_name is 'Alias Street Name';
+comment on column ng911.street_name_alias_tbl.ast_postyp is 'Alias Street Name Post Type';
+comment on column ng911.street_name_alias_tbl.ast_posdir is 'Alias Street Name Post Directional';
+comment on column ng911.street_name_alias_tbl.ast_posmod is 'Alias Street Name Post Modifier';
+comment on column ng911.street_name_alias_tbl.alstpredir is 'Alias Legacy Street Name Pre';
+comment on column ng911.street_name_alias_tbl.alstname is 'Alias Legacy Street Name'; 
+comment on column ng911.street_name_alias_tbl.alsttyp is 'Alias Legacy Street Name Type';
+comment on column ng911.street_name_alias_tbl.alstposdir is 'Alias Legacy Street Name Post';
+
+/*create landmark name table */ 
+create table nena.landmark_name_part_tbl as (
+        id serial primary key,
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        ACLMNNGUID char(254),
+        Site_NGUID char(254),
+        ACLandmark char(150)
+);
+
+comment on column ng911.landmark_name_part_tbl.id is 'Primary Key'; 
+comment on column ng911.landmark_name_part_tbl.discrpagid is 'DiscrpAgID';
+comment on column ng911.landmark_name_part_tbl.dateupdate is 'DateUpdate';
+comment on column ng911.landmark_name_part_tbl.effective is 'Effective ';
+comment on column ng911.landmark_name_part_tbl.expire is 'Expire';
+comment on column ng911.landmark_name_part_tbl.ACLMNNGUID is 'ACLMNNGUID';
+comment on column ng911.landmark_name_part_tbl.Site_NGUID is 'Site_NGUID';
+comment on column ng911.landmark_name_part_tbl.ACLandmark is 'ACLandmark';
 

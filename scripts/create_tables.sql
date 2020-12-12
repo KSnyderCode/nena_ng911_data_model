@@ -351,7 +351,7 @@ comment on column ng911.street_name_alias_tbl.alsttyp is 'Alias Legacy Street Na
 comment on column ng911.street_name_alias_tbl.alstposdir is 'Alias Legacy Street Name Post';
 
 /*create landmark name alias table */ 
-create table nena.landmark_name_alias as (
+create table nena.landmark_name_alias_tbl as (
         id serial primary key,
         discrpagid varchar(75),
         dateupdate timestamp,
@@ -362,14 +362,14 @@ create table nena.landmark_name_alias as (
         ACLandmark varchar(150)
 );
 
-comment on column ng911.landmark_name_part_tbl.id is 'Primary Key'; 
-comment on column ng911.landmark_name_part_tbl.discrpagid is 'DiscrpAgID';
-comment on column ng911.landmark_name_part_tbl.dateupdate is 'DateUpdate';
-comment on column ng911.landmark_name_part_tbl.effective is 'Effective ';
-comment on column ng911.landmark_name_part_tbl.expire is 'Expire';
-comment on column ng911.landmark_name_part_tbl.ACLMNNGUID is 'ACLMNNGUID';
-comment on column ng911.landmark_name_part_tbl.Site_NGUID is 'Site_NGUID';
-comment on column ng911.landmark_name_part_tbl.ACLandmark is 'ACLandmark';
+comment on column ng911.landmark_name_alias_tbl.id is 'Primary Key'; 
+comment on column ng911.landmark_name_alias_tbl.discrpagid is 'DiscrpAgID';
+comment on column ng911.landmark_name_alias_tbl.dateupdate is 'DateUpdate';
+comment on column ng911.landmark_name_alias_tbl.effective is 'Effective ';
+comment on column ng911.landmark_name_alias_tbl.expire is 'Expire';
+comment on column ng911.landmark_name_alias_tbl.ACLMNNGUID is 'ACLMNNGUID';
+comment on column ng911.landmark_name_alias_tbl.Site_NGUID is 'Site_NGUID';
+comment on column ng911.landmark_name_alias_tbl.ACLandmark is 'ACLandmark';
 
 /*create landmark name part table */ 
 
@@ -385,4 +385,183 @@ create table nena.landmark_name_part_tbl as (
         lmnamepart varchar(150),
         lmnp_order varchar(1)
 );
+
+comment on column ng911.landmark_name_part_tbl.id is 'Primary Key'; 
+comment on column ng911.landmark_name_part_tbl.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.landmark_name_part_tbl.dateupdate is 'Date Updated';
+comment on column ng911.landmark_name_part_tbl.effective is 'Effective Date';
+comment on column ng911.landmark_name_part_tbl.expire is 'Expiration Date';
+comment on column ng911.landmark_name_part_tbl.lmnp_nguid is 'Landmark Name Part NENA Globally Unique ID';
+comment on column ng911.landmark_name_part_tbl.site_nguid is 'Site NENA Globally Unique ID';
+comment on column ng911.landmark_name_part_tbl.aclmnnguid is 'Alias Complete Landmark Name NENA Globally Unique ID';
+comment on column ng911.landmark_name_part_tbl.lmnamepart is 'Landmark Name Part';
+comment on column ng911.landmark_name_part_tbl.lmnp_order is 'Landmark Name Part Order';
+
+/* create state table */
+
+create table nena.states as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+	discrpagid char(75), 
+	dateupdate timestamp, 
+	effective timestamp, 
+	expire timestamp, 
+	statenguid char(254), 
+	country char(2), 
+	state char(2) 
+); 
+
+
+/*create county table */ 
+
+create table nena.counties as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        cntynguid char(254),
+        country char(2),
+        state char(2),
+        county char(75)
+);
+
+
+/* create municipal boundary */ 
+
+create table nena.incorporated_municipal_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        incm_nguid char(254),
+        country char(2),
+        state char(2),
+        county char(75),
+        addcode char(6),
+        inc_muni char(100)
+);
+
+/* create community boundary */ 
+
+create table nena.neighborhood_community_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        statenguid char(254),
+        country char(2),
+        state char(2),
+        county char(75),
+        addcode char(6),
+        inc_muni char(100),
+        uninc_comm char(100),
+        nbrhd_comm chat(100)
+);
+
+/* create neighborhood boundary */ 
+
+create table nena.neighborhood_community_boundary as (
+        id serial primary key,
+        geom geometry (polygon, 4326),
+        discrpagid char(75),
+        dateupdate timestamp,
+        effective timestamp,
+        expire timestamp,
+        statenguid char(254),
+        country char(2),
+        state char(2),
+        county char(75),
+        addcode char(6),
+        inc_muni char(100),
+        uninc_comm char(100),
+        nbrhd_comm chat(100)
+);
+
+/* create railroad table */ 
+
+create table nena.railroads as (
+	id serial primary key,
+	geom geometry (polyline, 4326),
+	dateupdate timestamp,
+	RS_NGUID char(254),
+	RLOWN char(100),
+	RLOP char(100),
+	RLNAME char(100),
+	RMPL double precision,
+	RMPH double precision
+);
+
+/* create hydrology line table */
+
+create table nena.hydrology_lines as ( 
+	id serial primary key, 
+	geom geometry (polyline, 4326),
+	discrpagid char(75) not null, 
+	dateupdate timestamp, 
+	hs_nguid char(254), 
+	hs_type char(100), 
+	hs_name char(100) 
+); 
+
+/* create hydrology polygon table */ 
+
+create table nena.hydrology_polygons as (
+	id serial primary key,
+	geom geometry (polygon, 4326),
+	discrpagid char(75) not null,
+	dateupdate timestamp,
+	hs_nguid char(254),
+	hs_type char(100),
+	hs_name char(100)
+);
+
+/* create cell sector table */ 
+
+create table nena.cell_sector_location as (
+	id serial primary key,
+	geom geometry (point, 4326),
+	discrpagid char(75) not null,
+	dateupdate timestamp,
+	country char(2),
+	state char(2),
+	county char(75),
+	cell_nguid char(254),
+	site_id char(10),
+	sector_id char(4),
+	switch_id char(10),
+	cmarket_id char(10),
+	csite_name char(10),
+	esrd_esrk char(10),
+	esrk_last char(10),
+	csctr_ornt char(4),
+	technology char(10),
+	site_nguid char(254),
+	long double precision,
+	lat double precision,
+);
+
+/* create mile marker */ 
+
+create table nena.mile_marker as (
+        id serial primary key,
+        geom geometry (points, 4326),
+        discrpagid char(75) NOT NULL,
+        dateupdate timestamp,
+        MileMNGUID char(254),
+        MileM_Unit char(15),
+        MileMValue double precision,
+        MileM_Rte char(100),
+        MileM_Type char(15),
+        MileM_Ind char(1)
+);
+
+
+
+
 

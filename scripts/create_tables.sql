@@ -399,33 +399,52 @@ comment on column ng911.landmark_name_part_tbl.lmnp_order is 'Landmark Name Part
 
 /* create state table */
 
-create table nena.states as (
+create table nena.state as (
         id serial primary key,
         geom geometry (polygon, 4326),
-	discrpagid char(75), 
+	discrpagid varchar(75), 
 	dateupdate timestamp, 
 	effective timestamp, 
 	expire timestamp, 
-	statenguid char(254), 
-	country char(2), 
-	state char(2) 
+	statenguid varchar(254), 
+	country varchar(2), 
+	state varchar(2) 
 ); 
 
 
+comment on column ng911.state.id is 'Primary Key'; 
+comment on column ng911.state.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.state.dateupdate is 'Date Updated';
+comment on column ng911.state.effective is 'Effective Date';
+comment on column ng911.state.expire is 'Expiration Date';
+comment on column ng911.state.statenguid is 'State NENA Globally Unique ID';
+comment on column ng911.state.country is 'Country';
+comment on column ng911.state.state is 'State';
+
 /*create county table */ 
 
-create table nena.counties as (
+create table nena.county as (
         id serial primary key,
         geom geometry (polygon, 4326),
-        discrpagid char(75),
+        discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        cntynguid char(254),
-        country char(2),
-        state char(2),
-        county char(75)
+        cntynguid varchar(254),
+        country varchar(2),
+        state varchar(2),
+        county varchar(75)
 );
+
+comment on column ng911.county.id is 'Primary Key'; 
+comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.county.dateupdate is 'Date Updated';
+comment on column ng911.county.effective is 'Effective Date';
+comment on column ng911.county.expire is 'Expiration Date';
+comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
+comment on column ng911.county.country is 'Country';
+comment on column ng911.county.state is 'State';
+comment on column ng911.county.county is 'County'; 
 
 
 /* create municipal boundary */ 
@@ -433,54 +452,78 @@ create table nena.counties as (
 create table nena.incorporated_municipal_boundary as (
         id serial primary key,
         geom geometry (polygon, 4326),
-        discrpagid char(75),
+        discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        incm_nguid char(254),
-        country char(2),
-        state char(2),
-        county char(75),
-        addcode char(6),
-        inc_muni char(100)
+        incm_nguid varchar(254),
+        country varchar(2),
+        state varchar(2),
+        county varchar(75),
+        addcode varchar(6),
+        inc_muni varchar(100)
 );
+
+comment on column ng911.county.id is 'Primary Key'; 
+comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.county.dateupdate is 'Date Updated';
+comment on column ng911.county.effective is 'Effective Date';
+comment on column ng911.county.expire is 'Expiration Date';
+comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
+comment on column ng911.county.country is 'Country';
+comment on column ng911.county.state is 'State';
+comment on column ng911.county.county is 'County'; 
+comment on column ng911.county.addcode is 'Additional Code'; 
+comment on column ng911.county.inc_muni is 'Incorporated Municipality'; 
 
 /* create community boundary */ 
 
 create table nena.neighborhood_community_boundary as (
         id serial primary key,
         geom geometry (polygon, 4326),
-        discrpagid char(75),
+        discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        statenguid char(254),
-        country char(2),
-        state char(2),
-        county char(75),
-        addcode char(6),
-        inc_muni char(100),
-        uninc_comm char(100),
-        nbrhd_comm chat(100)
+        statenguid varchar(254),
+        country varchar(2),
+        state varchar(2),
+        county varchar(75),
+        addcode varchar(6),
+        inc_muni varchar(100),
+        uninc_comm varchar(100)
 );
+
+comment on column ng911.county.id is 'Primary Key'; 
+comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.county.dateupdate is 'Date Updated';
+comment on column ng911.county.effective is 'Effective Date';
+comment on column ng911.county.expire is 'Expiration Date';
+comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
+comment on column ng911.county.country is 'Country';
+comment on column ng911.county.state is 'State';
+comment on column ng911.county.county is 'County'; 
+comment on column ng911.county.addcode is 'Additional Code'; 
+comment on column ng911.county.uninc_muni is 'Unincorporated Municipality'; 
+
 
 /* create neighborhood boundary */ 
 
-create table nena.neighborhood_community_boundary as (
+create table nena.neighborhood_neighborhood_boundary as (
         id serial primary key,
         geom geometry (polygon, 4326),
-        discrpagid char(75),
+        discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        statenguid char(254),
-        country char(2),
-        state char(2),
-        county char(75),
-        addcode char(6),
-        inc_muni char(100),
-        uninc_comm char(100),
-        nbrhd_comm chat(100)
+        statenguid varchar(254),
+        country varchar(2),
+        state varchar(2),
+        county varchar(75),
+        addcode varchar(6),
+        inc_muni varchar(100),
+        uninc_comm varchar(100),
+        nbrhd_comm varchar(100)
 );
 
 /* create railroad table */ 

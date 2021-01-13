@@ -490,7 +490,6 @@ create table nena.neighborhood_community_boundary as (
         state varchar(2),
         county varchar(75),
         addcode varchar(6),
-        inc_muni varchar(100),
         uninc_comm varchar(100)
 );
 
@@ -509,14 +508,14 @@ comment on column ng911.county.uninc_muni is 'Unincorporated Municipality';
 
 /* create neighborhood boundary */ 
 
-create table nena.neighborhood_neighborhood_boundary as (
+create table nena.neighborhood_boundary as (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        statenguid varchar(254),
+        nbrhdnguid varchar(254),
         country varchar(2),
         state varchar(2),
         county varchar(75),
@@ -525,6 +524,20 @@ create table nena.neighborhood_neighborhood_boundary as (
         uninc_comm varchar(100),
         nbrhd_comm varchar(100)
 );
+        
+comment on column ng911.neighborhood_boundary.id is 'Primary Key'; 
+comment on column ng911.neighborhood_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column ng911.neighborhood_boundary.dateupdate is 'Date Updated';
+comment on column ng911.neighborhood_boundary.effective is 'Effective Date';
+comment on column ng911.neighborhood_boundary.expire is 'Expiration Date';
+comment on column ng911.neighborhood_boundary.nbrhdnguid is 'Neighborhood NENA Globally Unique ID';
+comment on column ng911.neighborhood_boundary.country is 'Country';
+comment on column ng911.neighborhood_boundary.state is 'State';
+comment on column ng911.neighborhood_boundary.county is 'County'; 
+comment on column ng911.neighborhood_boundary.addcode is 'Additional Code';
+comment on column ng911.neighborhood_boundary.inc_muni is 'Incorporated Municipality';
+comment on column ng911.neighborhood_boundary.uninc_comm is 'Unincorporated Community';
+comment on column ng911.neighborhood_boundary.nbrhd_comm is 'Neighborhood Community';
 
 /* create railroad table */ 
 
@@ -532,13 +545,22 @@ create table nena.railroads as (
 	id serial primary key,
 	geom geometry (polyline, 4326),
 	dateupdate timestamp,
-	RS_NGUID char(254),
-	RLOWN char(100),
-	RLOP char(100),
-	RLNAME char(100),
-	RMPL double precision,
-	RMPH double precision
+	rs_nguid char(254),
+	rlown char(100),
+	rlop char(100),
+	rlname char(100),
+	rmpl double precision,
+	rmph double precision
 );
+
+comment on column nena.railroads.id is 'Primary Key'; 
+comment on column nena.railroads.dateupdate is 'Date Updated'; 
+comment on column nena.railroads.rs_nguid is 'Rail Segment NENA Globally Unique ID'; 
+comment on column nena.railroads.rlown is 'Rail Line Owner';
+comment on column nena.railroads.rlop is 'Rail Line Operator';
+comment on column nena.railroads.rlname is 'Rail Line Name';
+comment on column nena.railroads.rmpl is 'Rail Mile Post Low';
+comment on column nena.railroads.rmph is 'Rail Mile Post High';
 
 /* create hydrology line table */
 
@@ -552,6 +574,13 @@ create table nena.hydrology_lines as (
 	hs_name char(100) 
 ); 
 
+comment on column nena.hydrology_lines.id is 'Primary Key'; 
+comment on column nena.hydrology_lines.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.hydrology_lines.dateupdate is 'Date Updated';
+comment on column nena.hydrology_lines.hs_nguid is 'Hydrology Segment NENA Globally Unique ID';
+comment on column nena.hydrology_lines.hs_type is 'Hydrology Segment Type';
+comment on column nena.hydrology_lines.hs_name is 'Hydrology Segment Name';
+
 /* create hydrology polygon table */ 
 
 create table nena.hydrology_polygons as (
@@ -563,6 +592,13 @@ create table nena.hydrology_polygons as (
 	hs_type char(100),
 	hs_name char(100)
 );
+
+comment on nena.hydrology_polygons.id as 'Primary Key'; 
+comment on nena.hydrology_polygons.discrpagid as 'Discrepancy Agency ID';
+comment on nena.hydrology_polygons.dateupdate as 'Date Updated';
+comment on nena.hydrology_polygons.hs_nguid as 'Hydrology Polygon NENA Globally Unique ID';
+comment on nena.hydrology_polygons.hs_type as 'Hydrology Polygon Type';
+comment on nena.hydrology_polygons.hs_name as 'Hydrology Polygon Name';
 
 /* create cell sector table */ 
 
@@ -589,6 +625,26 @@ create table nena.cell_sector_location as (
 	lat double precision,
 );
 
+comment on nena.cell_sector_location.id as 'Primary Key';
+comment on nena.cell_sector_location.discrpagid as 'Discrepancy Agency ID';
+comment on nena.cell_sector_location.dateupdate as 'Date Updated';
+comment on nena.cell_sector_location.country as 'Country';
+comment on nena.cell_sector_location.state as 'State';
+comment on nena.cell_sector_location.county as 'County';
+comment on nena.cell_sector_location.cell_nguid as 'Cell NENA Globally Unique ID';
+comment on nena.cell_sector_location.site_id as 'Site ID';
+comment on nena.cell_sector_location.sector_id as 'Sector ID';
+comment on nena.cell_sector_location.switch_id as 'Switch ID';
+comment on nena.cell_sector_location.cmarket_id as 'Market ID';
+comment on nena.cell_sector_location.csite_name as 'Cell Site ID';
+comment on nena.cell_sector_location.esrd_esrk as 'ESRD or First ESRK';
+comment on nena.cell_sector_location.esrk_last as 'Last ESRK';
+comment on nena.cell_sector_location.csctr_ornt as 'Sector Orientation';
+comment on nena.cell_sector_location.technology as 'Technology';
+comment on nena.cell_sector_location.site_nguid as 'Site NENA Globally Unique ID';
+comment on nena.cell_sector_location.long as 'Longitude';
+comment on nena.cell_sector_location.lat as 'Latitude';
+
 /* create mile marker */ 
 
 create table nena.mile_marker as (
@@ -596,15 +652,23 @@ create table nena.mile_marker as (
         geom geometry (points, 4326),
         discrpagid char(75) NOT NULL,
         dateupdate timestamp,
-        MileMNGUID char(254),
-        MileM_Unit char(15),
-        MileMValue double precision,
-        MileM_Rte char(100),
-        MileM_Type char(15),
-        MileM_Ind char(1)
+        milemnguid char(254),
+        milem_unit char(15),
+        milemvalue double precision,
+        milem_rte char(100),
+        milem_type char(15),
+        milem_ind char(1)
 );
 
-
+comment on nena.mile_marker.id as 'Primary Key';
+comment on nena.mile_marker.discrpagid as 'Discrepancy Agency ID';
+comment on nena.mile_marker.dateupdate as 'Date Updated';
+comment on nena.mile_marker.milemnguid as 'Mile Post NENA Globally Unique ID';
+comment on nena.mile_marker.milem_unit as 'Mile Post Unit of Measurement';
+comment on nena.mile_marker.milemvalue as 'Mile Post Measurement Value';
+comment on nena.mile_marker.milem_rte as 'Mile Post Route Name';
+comment on nena.mile_marker.milem_type as 'Mile Post Type';
+comment on nena.mile_marker.milem_ind as 'Mile POst Indicator';
 
 
 

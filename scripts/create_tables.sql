@@ -1,19 +1,19 @@
 /*taken from NENA-sta-006.1.1-2020_ng9-1-.pdf*/ 
 
-create schema if not exists ng911; 
+create schema if not exists nena; 
 
 /* create the centerline dataset */ 
 
-create table ng911.centerlines as ( 
+create table nena.centerlines ( 
 	id serial primary key, 
-	geom geometry (polylines, 4326),
+	geom geometry (linestring, 4326),
 	discrpagid varchar(75) NOT NULL, 
 	dateupdate timestamp, 
 	effective timestamp, 
 	expire timestamp, 
 	rcl_nguid varchar(254) NOT NULL, 
 	adnumpre_l varchar(15), 
-	adnumpre_r cvarhar(15), 
+	adnumpre_r varchar(15), 
 	fromaddr_l integer NOT NULL,
 	toaddr_l integer NOT NULL, 
 	fromaddr_r integer NOT NULL, 
@@ -58,71 +58,68 @@ create table ng911.centerlines as (
 	oneway varchar(2), 
         speedlimit varchar(3), 
 	valid_l varchar(1), 
-	valid_r varchar(1), 
+	valid_r varchar(1) 
 ); 
 
-comment on table ng911.centerlines is 'Road centerlines represent the estimated centerline of a real world roadway. GIS road
-centerline arc-node topology is associated with attribute data containing information on
-street names, address ranges, jurisdictional boundaries, and other attributes';
-comment on column ng911.centerlines.id is  'Primary Key'; 
-comment on column ng911.centerlines.discrpagid in s 'Discrepancy Agency ID'; 
-comment on column ng911.centerlines.dateupdate in s 'Date Updated';
-comment on column ng911.centerlines.effective in s 'Effective Date';
-comment on column ng911.centerlines.expire in s 'Exiration Date ';
-comment on column ng911.centerlines.rcl_nguid in s 'Road Centerline NENA Globally Unique';
-comment on column ng911.centerlines.adnumpre_l in s 'Left Address Number Prefix';
-comment on column ng911.centerlines.adnumpre_r in s 'Right Address Number PRefix';
-comment on column ng911.centerlines.fromaddr_l in s 'Left FROM Address';
-comment on column ng911.centerlines.toaddr_l in s 'Left TO Address';
-comment on column ng911.centerlines.fromaddr_r in s 'Right FROM Address';
-comment on column ng911.centerlines.toaddr_r in s 'Right TO Address';
-comment on column ng911.centerlines.parity_l in s 'Parity Left';
-comment on column ng911.centerlines.parity_r in s 'Parity Right';
-comment on column ng911.centerlines.st_premod in s 'Street Name Pre Modifier';
-comment on column ng911.centerlines.st_predir in s 'Street Name Pre Directional';
-comment on column ng911.centerlines.st_pretyp in s 'Street Name Pre Type';
-comment on column ng911.centerlines.st_presep in s 'Street Name Pre Type Separator';
-comment on column ng911.centerlines.st_name in s 'Street Name';
-comment on column ng911.centerlines.st_postyp in s 'Street Name Post Type';
-comment on column ng911.centerlines.st_posdir in s 'Street Name Post Directional';
-comment on column ng911.centerlines.st_posmod in s 'Street Name Post Modifier';
-comment on column ng911.centerlines.lst_predir in s 'Legacy Street Name Pre Directional'; 
-comment on column ng911.centerlines.lst_name in s 'Legacy Street Name';
-comment on column ng911.centerlines.lst_type in s 'Legacy Street Name Type';
-comment on column ng911.centerlines.lst_posdir in s 'Legacy Street Name Post Directional';
-comment on column ng911.centerlines.esn_l in s 'ESN Left';
-comment on column ng911.centerlines.esn_r in s 'ESN Right';
-comment on column ng911.centerlines.msagcomm_l in s 'MSAG Community Name Left';
-comment on column ng911.centerlines.msagcomm_r in s 'MSAG Community Name Right';
-comment on column ng911.centerlines.country_l in s 'Country Left';
-comment on column ng911.centerlines.country_r in s 'Country Right';
-comment on column ng911.centerlines.state_l in s 'State Left';
-comment on column ng911.centerlines.state_r in s 'State Right';
-comment on column ng911.centerlines.county_l in s 'County Left';
-comment on column ng911.centerlines.county_r in s 'County Right';
-comment on column ng911.centerlines.addcode_l in s 'Additional Code Left';
-comment on column ng911.centerlines.addcode_r in s 'Additional Code Right';
-comment on column ng911.centerlines.incmuni_l in s 'Incorporated Municipality Left';
-comment on column ng911.centerlines.incmuni_r in s 'Incorporated Municipality Right';
-comment on column ng911.centerlines.uninccom_lin s 'Unincorporated Community Left';
-comment on column ng911.centerlines.uninccom_r in s 'Unincorporated Community Right';
-comment on column ng911.centerlines.nbrhdcom_l in s 'Neighborhood Community Left';
-comment on column ng911.centerlines.nbrhdcom_r in s 'Neighborhood Community Right';
-comment on column ng911.centerlines.postcode_l in s 'Postal Code Left';
-comment on column ng911.centerlines.postcode_r in s 'Postal Code Right';
-comment on column ng911.centerlines.postcomm_l in s 'Postal Community Name Left';
-comment on column ng911.centerlines.postcomm_r in s 'Postal Community Name Right';
-comment on column ng911.centerlines.roadclass in s 'Road Class';
-comment on column ng911.centerlines.oneway in s 'One-Way';
-comment on column ng911.centerlines.speedlimit in s 'Speed Limit';
-comment on column ng911.centerlines.valid_l in s 'Validation Left';
-comment on column ng911.centerlines.valid_r in s 'Validation Right';
+comment on column nena.centerlines.id is 'Primary Key'; 
+comment on column nena.centerlines.discrpagid is 'Discrepancy Agency ID'; 
+comment on column nena.centerlines.dateupdate is 'Date Updated';
+comment on column nena.centerlines.effective is 'Effective Date';
+comment on column nena.centerlines.expire is 'Exiration Date ';
+comment on column nena.centerlines.rcl_nguid is 'Road Centerline NENA Globally Unique';
+comment on column nena.centerlines.adnumpre_l is 'Left Address Number Prefix';
+comment on column nena.centerlines.adnumpre_r is 'Right Address Number PRefix';
+comment on column nena.centerlines.fromaddr_l is 'Left FROM Address';
+comment on column nena.centerlines.toaddr_l is 'Left TO Address';
+comment on column nena.centerlines.fromaddr_r is 'Right FROM Address';
+comment on column nena.centerlines.toaddr_r is 'Right TO Address';
+comment on column nena.centerlines.parity_l is 'Parity Left';
+comment on column nena.centerlines.parity_r is 'Parity Right';
+comment on column nena.centerlines.st_premod is 'Street Name Pre Modifier';
+comment on column nena.centerlines.st_predir is 'Street Name Pre Directional';
+comment on column nena.centerlines.st_pretyp is 'Street Name Pre Type';
+comment on column nena.centerlines.st_presep is 'Street Name Pre Type Separator';
+comment on column nena.centerlines.st_name is 'Street Name';
+comment on column nena.centerlines.st_postyp is 'Street Name Post Type';
+comment on column nena.centerlines.st_posdir is 'Street Name Post Directional';
+comment on column nena.centerlines.st_posmod is 'Street Name Post Modifier';
+comment on column nena.centerlines.lst_predir is 'Legacy Street Name Pre Directional'; 
+comment on column nena.centerlines.lst_name is 'Legacy Street Name';
+comment on column nena.centerlines.lst_type is 'Legacy Street Name Type';
+comment on column nena.centerlines.lst_posdir is 'Legacy Street Name Post Directional';
+comment on column nena.centerlines.esn_l is 'ESN Left';
+comment on column nena.centerlines.esn_r is 'ESN Right';
+comment on column nena.centerlines.msagcomm_l is 'MSAG Community Name Left';
+comment on column nena.centerlines.msagcomm_r is 'MSAG Community Name Right';
+comment on column nena.centerlines.country_l is 'Country Left';
+comment on column nena.centerlines.country_r is 'Country Right';
+comment on column nena.centerlines.state_l is 'State Left';
+comment on column nena.centerlines.state_r is 'State Right';
+comment on column nena.centerlines.county_l is 'County Left';
+comment on column nena.centerlines.county_r is 'County Right';
+comment on column nena.centerlines.addcode_l is 'Additional Code Left';
+comment on column nena.centerlines.addcode_r is 'Additional Code Right';
+comment on column nena.centerlines.incmuni_l is 'Incorporated Municipality Left';
+comment on column nena.centerlines.incmuni_r is 'Incorporated Municipality Right';
+comment on column nena.centerlines.uninccom_l is 'Unincorporated Community Left';
+comment on column nena.centerlines.uninccom_r is 'Unincorporated Community Right';
+comment on column nena.centerlines.nbrhdcom_l is 'Neighborhood Community Left';
+comment on column nena.centerlines.nbrhdcom_r is 'Neighborhood Community Right';
+comment on column nena.centerlines.postcode_l is 'Postal Code Left';
+comment on column nena.centerlines.postcode_r is 'Postal Code Right';
+comment on column nena.centerlines.postcomm_l is 'Postal Community Name Left';
+comment on column nena.centerlines.postcomm_r is 'Postal Community Name Right';
+comment on column nena.centerlines.roadclass is 'Road Class';
+comment on column nena.centerlines.oneway is 'One-Way';
+comment on column nena.centerlines.speedlimit is 'Speed Limit';
+comment on column nena.centerlines.valid_l is 'Validation Left';
+comment on column nena.centerlines.valid_r is 'Validation Right';
 
 /* Create Address Table */ 
 
-create table ng911.addresspoints (
+create table nena.addresspoints (
         id serial primary key,
-        geom geometry (polylines, 4326),
+        geom geometry (point, 4326),
         discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
@@ -166,63 +163,63 @@ create table ng911.addresspoints (
         mile_post varchar(150),
         place_type varchar(50),
         placement varchar(25),
-        long double,
-        lat double,
+        long double precision,
+        lat double precision,
         elev integer
 );
 
-comment on table ng911.addresspoints is 'Site/Structure Address Points ideally represent the location of a site or structure or the location of access to a site or structure. Site/Structure Address Points can also represent landmarks.'; 
-comment on column ng911.addresspoints.id is 'Primary Key'; 
-comment on column ng911.addresspoints.discrpagid is 'Discrepancy Agency ID'; 
-comment on column ng911.addresspoints.dateupdate is 'Date Updated'; 
-comment on column ng911.addresspoints.effective is 'Effective Date'; 
-comment on column ng911.addresspoints.expire is 'Expiration Date';  
-comment on column ng911.addresspoints.site_nguid is 'Site NENA Globally Unique ID';
-comment on column ng911.addresspoints.country is 'Country';
-comment on column ng911.addresspoints.state is 'State';
-comment on column ng911.addresspoints.county is 'County';
-comment on column ng911.addresspoints.addcode is 'Additional Code';
-comment on column ng911.addresspoints.adddatauri is 'Additional Data URI';
-comment on column ng911.addresspoints.inc_muni is 'Incorporated Municipality';
-comment on column ng911.addresspoints.uninc_comm is 'Unincorporated Community';
-comment on column ng911.addresspoints.nbrhd_comm is 'Neighborhood Community';
-comment on column ng911.addresspoints.addnum_pre is 'Address Number Prefix';
-comment on column ng911.addresspoints.add_number is 'Address Number';
-comment on column ng911.addresspoints.addnum_suf is 'Address Number Suffix';
-comment on column ng911.addresspoints.st_premod is 'Street Name Pre Modifier';
-comment on column ng911.addresspoints.st_predir is 'Street Name Pre Directional';
-comment on column ng911.addresspoints.st_pretyp is 'Street Name Pre Type';
-comment on column ng911.addresspoints.st_presep is 'Street Name Pre Type Separator';
-comment on column ng911.addresspoints.st_name is 'Street Name';
-comment on column ng911.addresspoints.st_postyp is 'Street Name Post Type';
-comment on column ng911.addresspoints.st_posdir is 'Street Name Post Directional';
-comment on column ng911.addresspoints.st_posmod is 'Street Name Post Modifier';
-comment on column ng911.addresspoints.lst_predir is 'Legacy Street Name Pre Directional';
-comment on column ng911.addresspoints.lst_name is 'Legacy Street Name';
-comment on column ng911.addresspoints.lst_type is 'Legacy Street Name Type';
-comment on column ng911.addresspoints.lst_posdir is 'Legacy Street Name Post Directional';
-comment on column ng911.addresspoints.esn is 'ESN';
-comment on column ng911.addresspoints.msagcomm is 'MSAG Community Name';
-comment on column ng911.addresspoints.post_comm is 'Postal Community Name';
-comment on column ng911.addresspoints.post_code is 'Postal Code';
-comment on column ng911.addresspoints.post_code4 is 'ZIP Plus 4';
-comment on column ng911.addresspoints.building is 'Building';
-comment on column ng911.addresspoints.floor is 'Floor';
-comment on column ng911.addresspoints.unit is 'Unit';
-comment on column ng911.addresspoints.room is 'Room';
-comment on column ng911.addresspoints.seat is 'Seat';
-comment on column ng911.addresspoints.addtl_loc is 'Additional Location Information';
-comment on column ng911.addresspoints.landmkname is 'Complete Landmark Name';
-comment on column ng911.addresspoints.mile_post is 'Mile Post';
-comment on column ng911.addresspoints.place_type is 'Place Type';
-comment on column ng911.addresspoints.placement is 'Placement Method';
-comment on column ng911.addresspoints.long is 'Longitude';
-comment on column ng911.addresspoints.lat is 'Latitude';
-comment on column ng911.addresspoints.elev is 'Elevation';
+comment on table nena.addresspoints is 'Site/Structure Address Points ideally represent the location of a site or structure or the location of access to a site or structure. Site/Structure Address Points can also represent landmarks.'; 
+comment on column nena.addresspoints.id is 'Primary Key'; 
+comment on column nena.addresspoints.discrpagid is 'Discrepancy Agency ID'; 
+comment on column nena.addresspoints.dateupdate is 'Date Updated'; 
+comment on column nena.addresspoints.effective is 'Effective Date'; 
+comment on column nena.addresspoints.expire is 'Expiration Date';  
+comment on column nena.addresspoints.site_nguid is 'Site NENA Globally Unique ID';
+comment on column nena.addresspoints.country is 'Country';
+comment on column nena.addresspoints.state is 'State';
+comment on column nena.addresspoints.county is 'County';
+comment on column nena.addresspoints.addcode is 'Additional Code';
+comment on column nena.addresspoints.adddatauri is 'Additional Data URI';
+comment on column nena.addresspoints.inc_muni is 'Incorporated Municipality';
+comment on column nena.addresspoints.uninc_comm is 'Unincorporated Community';
+comment on column nena.addresspoints.nbrhd_comm is 'Neighborhood Community';
+comment on column nena.addresspoints.addnum_pre is 'Address Number Prefix';
+comment on column nena.addresspoints.add_number is 'Address Number';
+comment on column nena.addresspoints.addnum_suf is 'Address Number Suffix';
+comment on column nena.addresspoints.st_premod is 'Street Name Pre Modifier';
+comment on column nena.addresspoints.st_predir is 'Street Name Pre Directional';
+comment on column nena.addresspoints.st_pretyp is 'Street Name Pre Type';
+comment on column nena.addresspoints.st_presep is 'Street Name Pre Type Separator';
+comment on column nena.addresspoints.st_name is 'Street Name';
+comment on column nena.addresspoints.st_postyp is 'Street Name Post Type';
+comment on column nena.addresspoints.st_posdir is 'Street Name Post Directional';
+comment on column nena.addresspoints.st_posmod is 'Street Name Post Modifier';
+comment on column nena.addresspoints.lst_predir is 'Legacy Street Name Pre Directional';
+comment on column nena.addresspoints.lst_name is 'Legacy Street Name';
+comment on column nena.addresspoints.lst_type is 'Legacy Street Name Type';
+comment on column nena.addresspoints.lst_posdir is 'Legacy Street Name Post Directional';
+comment on column nena.addresspoints.esn is 'ESN';
+comment on column nena.addresspoints.msagcomm is 'MSAG Community Name';
+comment on column nena.addresspoints.post_comm is 'Postal Community Name';
+comment on column nena.addresspoints.post_code is 'Postal Code';
+comment on column nena.addresspoints.post_code4 is 'ZIP Plus 4';
+comment on column nena.addresspoints.building is 'Building';
+comment on column nena.addresspoints.floor is 'Floor';
+comment on column nena.addresspoints.unit is 'Unit';
+comment on column nena.addresspoints.room is 'Room';
+comment on column nena.addresspoints.seat is 'Seat';
+comment on column nena.addresspoints.addtl_loc is 'Additional Location Information';
+comment on column nena.addresspoints.landmkname is 'Complete Landmark Name';
+comment on column nena.addresspoints.mile_post is 'Mile Post';
+comment on column nena.addresspoints.place_type is 'Place Type';
+comment on column nena.addresspoints.placement is 'Placement Method';
+comment on column nena.addresspoints.long is 'Longitude';
+comment on column nena.addresspoints.lat is 'Latitude';
+comment on column nena.addresspoints.elev is 'Elevation';
 
 /* Creating PSAP Boundary */
 
-create table ng911.psap_boundary as (
+create table nena.psap_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -239,24 +236,24 @@ create table ng911.psap_boundary as (
         dsplayname varchar(60)
 );
 
-comment on table ng911.psap_boundary is 'The primary use for the PSAP Boundary is to route call/emergency requests for NG9-1-1. This layer depicts the polygon(s) and related attribute information that defines the geographic area of all PSAP boundaries within a given 9-1-1 Authority’s geographic coverage area';
-comment on column ng911.psap_boundary.id is 'Primary Key'; 
-comment on column ng911.psap_boundary.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.psap_boundary.dateupdate is 'Date Updated';
-comment on column ng911.psap_boundary.effective is 'Effective Date';
-comment on column ng911.psap_boundary.expire is 'Expiration Date';
-comment on column ng911.psap_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
-comment on column ng911.psap_boundary.state is 'State';
-comment on column ng911.psap_boundary.agency_id is 'Agency ID';
-comment on column ng911.psap_boundary.serviceuri is 'Service URI';
-comment on column ng911.psap_boundary.serviceurn is 'Service URN';
-comment on column ng911.psap_boundary.servicenum is 'Service Number';
-comment on column ng911.psap_boundary.avcard_uri is 'Agency vCard URI';
-comment on column ng911.psap_boundary.dsplayname is 'Display Name';
+comment on table nena.psap_boundary is 'The primary use for the PSAP Boundary is to route call/emergency requests for NG9-1-1. This layer depicts the polygon(s) and related attribute information that defines the geographic area of all PSAP boundaries within a given 9-1-1 Authority’s geographic coverage area';
+comment on column nena.psap_boundary.id is 'Primary Key'; 
+comment on column nena.psap_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.psap_boundary.dateupdate is 'Date Updated';
+comment on column nena.psap_boundary.effective is 'Effective Date';
+comment on column nena.psap_boundary.expire is 'Expiration Date';
+comment on column nena.psap_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
+comment on column nena.psap_boundary.state is 'State';
+comment on column nena.psap_boundary.agency_id is 'Agency ID';
+comment on column nena.psap_boundary.serviceuri is 'Service URI';
+comment on column nena.psap_boundary.serviceurn is 'Service URN';
+comment on column nena.psap_boundary.servicenum is 'Service Number';
+comment on column nena.psap_boundary.avcard_uri is 'Agency vCard URI';
+comment on column nena.psap_boundary.dsplayname is 'Display Name';
 
 /* Create emergency Service Boundary */ 
 
-create table ng911.emergency_service_boundary as (
+create table nena.emergency_service_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -273,42 +270,42 @@ create table ng911.emergency_service_boundary as (
         dsplayname varchar(60)
 );
 
-comment on column ng911.psap_boundary.id is 'Primary Key'; 
-comment on column ng911.emergency_service_boundary.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.emergency_service_boundary.dateupdate is 'Date Updated';
-comment on column ng911.emergency_service_boundary.effective is 'Effective Date';
-comment on column ng911.emergency_service_boundary.expire is 'Expiration Date';
-comment on column ng911.emergency_service_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
-comment on column ng911.emergency_service_boundary.state is 'State';
-comment on column ng911.emergency_service_boundary.agency_id is 'Agency ID';
-comment on column ng911.emergency_service_boundary.serviceuri is 'Service URI';
-comment on column ng911.emergency_service_boundary.serviceurn is 'Service URN';
-comment on column ng911.emergency_service_boundary.servicenum is 'Service Number';
-comment on column ng911.emergency_service_boundary.avcard_uri is 'Agency vCard URI';
-comment on column ng911.emergency_service_boundary.dsplayname is 'Display Name';
+comment on column nena.psap_boundary.id is 'Primary Key'; 
+comment on column nena.emergency_service_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.emergency_service_boundary.dateupdate is 'Date Updated';
+comment on column nena.emergency_service_boundary.effective is 'Effective Date';
+comment on column nena.emergency_service_boundary.expire is 'Expiration Date';
+comment on column nena.emergency_service_boundary.es_nguid is 'Emergency Service Boundary NENA Globally Unique ID';
+comment on column nena.emergency_service_boundary.state is 'State';
+comment on column nena.emergency_service_boundary.agency_id is 'Agency ID';
+comment on column nena.emergency_service_boundary.serviceuri is 'Service URI';
+comment on column nena.emergency_service_boundary.serviceurn is 'Service URN';
+comment on column nena.emergency_service_boundary.servicenum is 'Service Number';
+comment on column nena.emergency_service_boundary.avcard_uri is 'Agency vCard URI';
+comment on column nena.emergency_service_boundary.dsplayname is 'Display Name';
 
 /* Create Provisioning Boundary */ 
 
-create table ng911.provisioning_boundary as (
+create table nena.provisioning_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
         dateupdate timestamp,
         effective timestamp,
         expire timestamp,
-        pb_nguid varchar(254),
+        pb_nguid varchar(254)
 );
 
-comment on column ng911.provisioning_boundary.id is 'Primary Key'; 
-comment on column ng911.provisioning_boundary.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.provisioning_boundary.dateupdate is 'Date Updated';
-comment on column ng911.provisioning_boundary.effective is 'Effective Date';
-comment on column ng911.provisioning_boundary.expire is 'Expiration Date';
-comment on column ng911.provisioning_boundary.pb_nguid is 'Expiration Date';
+comment on column nena.provisioning_boundary.id is 'Primary Key'; 
+comment on column nena.provisioning_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.provisioning_boundary.dateupdate is 'Date Updated';
+comment on column nena.provisioning_boundary.effective is 'Effective Date';
+comment on column nena.provisioning_boundary.expire is 'Expiration Date';
+comment on column nena.provisioning_boundary.pb_nguid is 'Expiration Date';
 
 /* Create Street Name Alias Table */
 
-create table nena.street_name_alias_tbl as (
+create table nena.street_name_alias_tbl (
         id serial primary key,
         discrpagid varchar(75),
         dateupdate timestamp,
@@ -330,28 +327,28 @@ create table nena.street_name_alias_tbl as (
         alstposdir varchar(2)
 );
 
-comment on column ng911.street_name_alias_tbl.id is 'Primary Key'; 
-comment on column ng911.street_name_alias_tbl.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.street_name_alias_tbl.dateupdate is 'Date Updated';
-comment on column ng911.street_name_alias_tbl.effective is 'Effective Date';
-comment on column ng911.street_name_alias_tbl.expire is 'Expiration Date';
-comment on column ng911.street_name_alias_tbl.ast_nguid is 'Alias Street Name NENA Globally Unique ID'; 
-comment on column ng911.street_name_alias_tbl.rcl_nguid is 'Road Centerline NENA Globally Unique';
-comment on column ng911.street_name_alias_tbl.ast_premod is 'Alias Street Name Pre Modifier';
-comment on column ng911.street_name_alias_tbl.ast_predir is 'Alias Street Name Pre Directional';
-comment on column ng911.street_name_alias_tbl.ast_pretyp is 'Alias Street Name Pre Type';
-comment on column ng911.street_name_alias_tbl.ast_presep is 'Alias Street Name Pre Type Separator';
-comment on column ng911.street_name_alias_tbl.ast_name is 'Alias Street Name';
-comment on column ng911.street_name_alias_tbl.ast_postyp is 'Alias Street Name Post Type';
-comment on column ng911.street_name_alias_tbl.ast_posdir is 'Alias Street Name Post Directional';
-comment on column ng911.street_name_alias_tbl.ast_posmod is 'Alias Street Name Post Modifier';
-comment on column ng911.street_name_alias_tbl.alstpredir is 'Alias Legacy Street Name Pre';
-comment on column ng911.street_name_alias_tbl.alstname is 'Alias Legacy Street Name'; 
-comment on column ng911.street_name_alias_tbl.alsttyp is 'Alias Legacy Street Name Type';
-comment on column ng911.street_name_alias_tbl.alstposdir is 'Alias Legacy Street Name Post';
+comment on column nena.street_name_alias_tbl.id is 'Primary Key'; 
+comment on column nena.street_name_alias_tbl.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.street_name_alias_tbl.dateupdate is 'Date Updated';
+comment on column nena.street_name_alias_tbl.effective is 'Effective Date';
+comment on column nena.street_name_alias_tbl.expire is 'Expiration Date';
+comment on column nena.street_name_alias_tbl.ast_nguid is 'Alias Street Name NENA Globally Unique ID'; 
+comment on column nena.street_name_alias_tbl.rcl_nguid is 'Road Centerline NENA Globally Unique';
+comment on column nena.street_name_alias_tbl.ast_premod is 'Alias Street Name Pre Modifier';
+comment on column nena.street_name_alias_tbl.ast_predir is 'Alias Street Name Pre Directional';
+comment on column nena.street_name_alias_tbl.ast_pretyp is 'Alias Street Name Pre Type';
+comment on column nena.street_name_alias_tbl.ast_presep is 'Alias Street Name Pre Type Separator';
+comment on column nena.street_name_alias_tbl.ast_name is 'Alias Street Name';
+comment on column nena.street_name_alias_tbl.ast_postyp is 'Alias Street Name Post Type';
+comment on column nena.street_name_alias_tbl.ast_posdir is 'Alias Street Name Post Directional';
+comment on column nena.street_name_alias_tbl.ast_posmod is 'Alias Street Name Post Modifier';
+comment on column nena.street_name_alias_tbl.alstpredir is 'Alias Legacy Street Name Pre';
+comment on column nena.street_name_alias_tbl.alstname is 'Alias Legacy Street Name'; 
+comment on column nena.street_name_alias_tbl.alsttyp is 'Alias Legacy Street Name Type';
+comment on column nena.street_name_alias_tbl.alstposdir is 'Alias Legacy Street Name Post';
 
 /*create landmark name alias table */ 
-create table nena.landmark_name_alias_tbl as (
+create table nena.landmark_name_alias_tbl (
         id serial primary key,
         discrpagid varchar(75),
         dateupdate timestamp,
@@ -362,18 +359,18 @@ create table nena.landmark_name_alias_tbl as (
         ACLandmark varchar(150)
 );
 
-comment on column ng911.landmark_name_alias_tbl.id is 'Primary Key'; 
-comment on column ng911.landmark_name_alias_tbl.discrpagid is 'DiscrpAgID';
-comment on column ng911.landmark_name_alias_tbl.dateupdate is 'DateUpdate';
-comment on column ng911.landmark_name_alias_tbl.effective is 'Effective ';
-comment on column ng911.landmark_name_alias_tbl.expire is 'Expire';
-comment on column ng911.landmark_name_alias_tbl.ACLMNNGUID is 'ACLMNNGUID';
-comment on column ng911.landmark_name_alias_tbl.Site_NGUID is 'Site_NGUID';
-comment on column ng911.landmark_name_alias_tbl.ACLandmark is 'ACLandmark';
+comment on column nena.landmark_name_alias_tbl.id is 'Primary Key'; 
+comment on column nena.landmark_name_alias_tbl.discrpagid is 'DiscrpAgID';
+comment on column nena.landmark_name_alias_tbl.dateupdate is 'DateUpdate';
+comment on column nena.landmark_name_alias_tbl.effective is 'Effective ';
+comment on column nena.landmark_name_alias_tbl.expire is 'Expire';
+comment on column nena.landmark_name_alias_tbl.ACLMNNGUID is 'ACLMNNGUID';
+comment on column nena.landmark_name_alias_tbl.Site_NGUID is 'Site_NGUID';
+comment on column nena.landmark_name_alias_tbl.ACLandmark is 'ACLandmark';
 
 /*create landmark name part table */ 
 
-create table nena.landmark_name_part_tbl as (
+create table nena.landmark_name_part_tbl (
         id serial primary key,
         discrpagid varchar(75),
         dateupdate timestamp,
@@ -386,20 +383,20 @@ create table nena.landmark_name_part_tbl as (
         lmnp_order varchar(1)
 );
 
-comment on column ng911.landmark_name_part_tbl.id is 'Primary Key'; 
-comment on column ng911.landmark_name_part_tbl.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.landmark_name_part_tbl.dateupdate is 'Date Updated';
-comment on column ng911.landmark_name_part_tbl.effective is 'Effective Date';
-comment on column ng911.landmark_name_part_tbl.expire is 'Expiration Date';
-comment on column ng911.landmark_name_part_tbl.lmnp_nguid is 'Landmark Name Part NENA Globally Unique ID';
-comment on column ng911.landmark_name_part_tbl.site_nguid is 'Site NENA Globally Unique ID';
-comment on column ng911.landmark_name_part_tbl.aclmnnguid is 'Alias Complete Landmark Name NENA Globally Unique ID';
-comment on column ng911.landmark_name_part_tbl.lmnamepart is 'Landmark Name Part';
-comment on column ng911.landmark_name_part_tbl.lmnp_order is 'Landmark Name Part Order';
+comment on column nena.landmark_name_part_tbl.id is 'Primary Key'; 
+comment on column nena.landmark_name_part_tbl.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.landmark_name_part_tbl.dateupdate is 'Date Updated';
+comment on column nena.landmark_name_part_tbl.effective is 'Effective Date';
+comment on column nena.landmark_name_part_tbl.expire is 'Expiration Date';
+comment on column nena.landmark_name_part_tbl.lmnp_nguid is 'Landmark Name Part NENA Globally Unique ID';
+comment on column nena.landmark_name_part_tbl.site_nguid is 'Site NENA Globally Unique ID';
+comment on column nena.landmark_name_part_tbl.aclmnnguid is 'Alias Complete Landmark Name NENA Globally Unique ID';
+comment on column nena.landmark_name_part_tbl.lmnamepart is 'Landmark Name Part';
+comment on column nena.landmark_name_part_tbl.lmnp_order is 'Landmark Name Part Order';
 
 /* create state table */
 
-create table nena.state as (
+create table nena.state (
         id serial primary key,
         geom geometry (polygon, 4326),
 	discrpagid varchar(75), 
@@ -412,18 +409,18 @@ create table nena.state as (
 ); 
 
 
-comment on column ng911.state.id is 'Primary Key'; 
-comment on column ng911.state.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.state.dateupdate is 'Date Updated';
-comment on column ng911.state.effective is 'Effective Date';
-comment on column ng911.state.expire is 'Expiration Date';
-comment on column ng911.state.statenguid is 'State NENA Globally Unique ID';
-comment on column ng911.state.country is 'Country';
-comment on column ng911.state.state is 'State';
+comment on column nena.state.id is 'Primary Key'; 
+comment on column nena.state.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.state.dateupdate is 'Date Updated';
+comment on column nena.state.effective is 'Effective Date';
+comment on column nena.state.expire is 'Expiration Date';
+comment on column nena.state.statenguid is 'State NENA Globally Unique ID';
+comment on column nena.state.country is 'Country';
+comment on column nena.state.state is 'State';
 
 /*create county table */ 
 
-create table nena.county as (
+create table nena.county (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -436,20 +433,20 @@ create table nena.county as (
         county varchar(75)
 );
 
-comment on column ng911.county.id is 'Primary Key'; 
-comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.county.dateupdate is 'Date Updated';
-comment on column ng911.county.effective is 'Effective Date';
-comment on column ng911.county.expire is 'Expiration Date';
-comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
-comment on column ng911.county.country is 'Country';
-comment on column ng911.county.state is 'State';
-comment on column ng911.county.county is 'County'; 
+comment on column nena.county.id is 'Primary Key'; 
+comment on column nena.county.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.county.dateupdate is 'Date Updated';
+comment on column nena.county.effective is 'Effective Date';
+comment on column nena.county.expire is 'Expiration Date';
+comment on column nena.county.cntynguid is 'State NENA Globally Unique ID';
+comment on column nena.county.country is 'Country';
+comment on column nena.county.state is 'State';
+comment on column nena.county.county is 'County'; 
 
 
 /* create municipal boundary */ 
 
-create table nena.incorporated_municipal_boundary as (
+create table nena.incorporated_municipal_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -464,21 +461,21 @@ create table nena.incorporated_municipal_boundary as (
         inc_muni varchar(100)
 );
 
-comment on column ng911.county.id is 'Primary Key'; 
-comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.county.dateupdate is 'Date Updated';
-comment on column ng911.county.effective is 'Effective Date';
-comment on column ng911.county.expire is 'Expiration Date';
-comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
-comment on column ng911.county.country is 'Country';
-comment on column ng911.county.state is 'State';
-comment on column ng911.county.county is 'County'; 
-comment on column ng911.county.addcode is 'Additional Code'; 
-comment on column ng911.county.inc_muni is 'Incorporated Municipality'; 
+comment on column nena.incorporated_municipal_boundary.id is 'Primary Key'; 
+comment on column nena.incorporated_municipal_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.incorporated_municipal_boundary.dateupdate is 'Date Updated';
+comment on column nena.incorporated_municipal_boundary.effective is 'Effective Date';
+comment on column nena.incorporated_municipal_boundary.expire is 'Expiration Date';
+comment on column nena.incorporated_municipal_boundary.incm_nguid is 'State NENA Globally Unique ID';
+comment on column nena.incorporated_municipal_boundary.country is 'Country';
+comment on column nena.incorporated_municipal_boundary.state is 'State';
+comment on column nena.incorporated_municipal_boundary.county is 'County'; 
+comment on column nena.incorporated_municipal_boundary.addcode is 'Additional Code'; 
+comment on column nena.incorporated_municipal_boundary.inc_muni is 'Incorporated Municipality'; 
 
 /* create community boundary */ 
 
-create table nena.neighborhood_community_boundary as (
+create table nena.neighborhood_community_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -493,22 +490,22 @@ create table nena.neighborhood_community_boundary as (
         uninc_comm varchar(100)
 );
 
-comment on column ng911.county.id is 'Primary Key'; 
-comment on column ng911.county.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.county.dateupdate is 'Date Updated';
-comment on column ng911.county.effective is 'Effective Date';
-comment on column ng911.county.expire is 'Expiration Date';
-comment on column ng911.county.statenguid is 'State NENA Globally Unique ID';
-comment on column ng911.county.country is 'Country';
-comment on column ng911.county.state is 'State';
-comment on column ng911.county.county is 'County'; 
-comment on column ng911.county.addcode is 'Additional Code'; 
-comment on column ng911.county.uninc_muni is 'Unincorporated Municipality'; 
+comment on column nena.neighborhood_community_boundary.id is 'Primary Key'; 
+comment on column nena.neighborhood_community_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.neighborhood_community_boundary.dateupdate is 'Date Updated';
+comment on column nena.neighborhood_community_boundary.effective is 'Effective Date';
+comment on column nena.neighborhood_community_boundary.expire is 'Expiration Date';
+comment on column nena.neighborhood_community_boundary.statenguid is 'State NENA Globally Unique ID';
+comment on column nena.neighborhood_community_boundary.country is 'Country';
+comment on column nena.neighborhood_community_boundary.state is 'State';
+comment on column nena.neighborhood_community_boundary.county is 'County'; 
+comment on column nena.neighborhood_community_boundary.addcode is 'Additional Code'; 
+comment on column nena.neighborhood_community_boundary.uninc_comm is 'Unincorporated Municipality'; 
 
 
 /* create neighborhood boundary */ 
 
-create table nena.neighborhood_boundary as (
+create table nena.neighborhood_boundary (
         id serial primary key,
         geom geometry (polygon, 4326),
         discrpagid varchar(75),
@@ -525,25 +522,25 @@ create table nena.neighborhood_boundary as (
         nbrhd_comm varchar(100)
 );
         
-comment on column ng911.neighborhood_boundary.id is 'Primary Key'; 
-comment on column ng911.neighborhood_boundary.discrpagid is 'Discrepancy Agency ID';
-comment on column ng911.neighborhood_boundary.dateupdate is 'Date Updated';
-comment on column ng911.neighborhood_boundary.effective is 'Effective Date';
-comment on column ng911.neighborhood_boundary.expire is 'Expiration Date';
-comment on column ng911.neighborhood_boundary.nbrhdnguid is 'Neighborhood NENA Globally Unique ID';
-comment on column ng911.neighborhood_boundary.country is 'Country';
-comment on column ng911.neighborhood_boundary.state is 'State';
-comment on column ng911.neighborhood_boundary.county is 'County'; 
-comment on column ng911.neighborhood_boundary.addcode is 'Additional Code';
-comment on column ng911.neighborhood_boundary.inc_muni is 'Incorporated Municipality';
-comment on column ng911.neighborhood_boundary.uninc_comm is 'Unincorporated Community';
-comment on column ng911.neighborhood_boundary.nbrhd_comm is 'Neighborhood Community';
+comment on column nena.neighborhood_boundary.id is 'Primary Key'; 
+comment on column nena.neighborhood_boundary.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.neighborhood_boundary.dateupdate is 'Date Updated';
+comment on column nena.neighborhood_boundary.effective is 'Effective Date';
+comment on column nena.neighborhood_boundary.expire is 'Expiration Date';
+comment on column nena.neighborhood_boundary.nbrhdnguid is 'Neighborhood NENA Globally Unique ID';
+comment on column nena.neighborhood_boundary.country is 'Country';
+comment on column nena.neighborhood_boundary.state is 'State';
+comment on column nena.neighborhood_boundary.county is 'County'; 
+comment on column nena.neighborhood_boundary.addcode is 'Additional Code';
+comment on column nena.neighborhood_boundary.inc_muni is 'Incorporated Municipality';
+comment on column nena.neighborhood_boundary.uninc_comm is 'Unincorporated Community';
+comment on column nena.neighborhood_boundary.nbrhd_comm is 'Neighborhood Community';
 
 /* create railroad table */ 
 
-create table nena.railroads as (
+create table nena.railroads (
 	id serial primary key,
-	geom geometry (polyline, 4326),
+	geom geometry (linestring, 4326),
 	dateupdate timestamp,
 	rs_nguid char(254),
 	rlown char(100),
@@ -564,9 +561,9 @@ comment on column nena.railroads.rmph is 'Rail Mile Post High';
 
 /* create hydrology line table */
 
-create table nena.hydrology_lines as ( 
+create table nena.hydrology_lines ( 
 	id serial primary key, 
-	geom geometry (polyline, 4326),
+	geom geometry (linestring, 4326),
 	discrpagid char(75) not null, 
 	dateupdate timestamp, 
 	hs_nguid char(254), 
@@ -583,7 +580,7 @@ comment on column nena.hydrology_lines.hs_name is 'Hydrology Segment Name';
 
 /* create hydrology polygon table */ 
 
-create table nena.hydrology_polygons as (
+create table nena.hydrology_polygons (
 	id serial primary key,
 	geom geometry (polygon, 4326),
 	discrpagid char(75) not null,
@@ -593,16 +590,16 @@ create table nena.hydrology_polygons as (
 	hs_name char(100)
 );
 
-comment on nena.hydrology_polygons.id as 'Primary Key'; 
-comment on nena.hydrology_polygons.discrpagid as 'Discrepancy Agency ID';
-comment on nena.hydrology_polygons.dateupdate as 'Date Updated';
-comment on nena.hydrology_polygons.hs_nguid as 'Hydrology Polygon NENA Globally Unique ID';
-comment on nena.hydrology_polygons.hs_type as 'Hydrology Polygon Type';
-comment on nena.hydrology_polygons.hs_name as 'Hydrology Polygon Name';
+comment on column nena.hydrology_polygons.id is 'Primary Key'; 
+comment on column nena.hydrology_polygons.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.hydrology_polygons.dateupdate is 'Date Updated';
+comment on column nena.hydrology_polygons.hs_nguid is 'Hydrology Polygon NENA Globally Unique ID';
+comment on column nena.hydrology_polygons.hs_type is 'Hydrology Polygon Type';
+comment on column nena.hydrology_polygons.hs_name is 'Hydrology Polygon Name';
 
 /* create cell sector table */ 
 
-create table nena.cell_sector_location as (
+create table nena.cell_sector_location (
 	id serial primary key,
 	geom geometry (point, 4326),
 	discrpagid char(75) not null,
@@ -622,34 +619,34 @@ create table nena.cell_sector_location as (
 	technology char(10),
 	site_nguid char(254),
 	long double precision,
-	lat double precision,
+	lat double precision
 );
 
-comment on nena.cell_sector_location.id as 'Primary Key';
-comment on nena.cell_sector_location.discrpagid as 'Discrepancy Agency ID';
-comment on nena.cell_sector_location.dateupdate as 'Date Updated';
-comment on nena.cell_sector_location.country as 'Country';
-comment on nena.cell_sector_location.state as 'State';
-comment on nena.cell_sector_location.county as 'County';
-comment on nena.cell_sector_location.cell_nguid as 'Cell NENA Globally Unique ID';
-comment on nena.cell_sector_location.site_id as 'Site ID';
-comment on nena.cell_sector_location.sector_id as 'Sector ID';
-comment on nena.cell_sector_location.switch_id as 'Switch ID';
-comment on nena.cell_sector_location.cmarket_id as 'Market ID';
-comment on nena.cell_sector_location.csite_name as 'Cell Site ID';
-comment on nena.cell_sector_location.esrd_esrk as 'ESRD or First ESRK';
-comment on nena.cell_sector_location.esrk_last as 'Last ESRK';
-comment on nena.cell_sector_location.csctr_ornt as 'Sector Orientation';
-comment on nena.cell_sector_location.technology as 'Technology';
-comment on nena.cell_sector_location.site_nguid as 'Site NENA Globally Unique ID';
-comment on nena.cell_sector_location.long as 'Longitude';
-comment on nena.cell_sector_location.lat as 'Latitude';
+comment on column nena.cell_sector_location.id is 'Primary Key';
+comment on column nena.cell_sector_location.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.cell_sector_location.dateupdate is 'Date Updated';
+comment on column nena.cell_sector_location.country is 'Country';
+comment on column nena.cell_sector_location.state is 'State';
+comment on column nena.cell_sector_location.county is 'County';
+comment on column nena.cell_sector_location.cell_nguid is 'Cell NENA Globally Unique ID';
+comment on column nena.cell_sector_location.site_id is 'Site ID';
+comment on column nena.cell_sector_location.sector_id is 'Sector ID';
+comment on column nena.cell_sector_location.switch_id is 'Switch ID';
+comment on column nena.cell_sector_location.cmarket_id is 'Market ID';
+comment on column nena.cell_sector_location.csite_name is 'Cell Site ID';
+comment on column nena.cell_sector_location.esrd_esrk is 'ESRD or First ESRK';
+comment on column nena.cell_sector_location.esrk_last is 'Last ESRK';
+comment on column nena.cell_sector_location.csctr_ornt is 'Sector Orientation';
+comment on column nena.cell_sector_location.technology is 'Technology';
+comment on column nena.cell_sector_location.site_nguid is 'Site NENA Globally Unique ID';
+comment on column nena.cell_sector_location.long is 'Longitude';
+comment on column nena.cell_sector_location.lat is 'Latitude';
 
 /* create mile marker */ 
 
-create table nena.mile_marker as (
+create table nena.mile_marker (
         id serial primary key,
-        geom geometry (points, 4326),
+        geom geometry (point, 4326),
         discrpagid char(75) NOT NULL,
         dateupdate timestamp,
         milemnguid char(254),
@@ -660,15 +657,13 @@ create table nena.mile_marker as (
         milem_ind char(1)
 );
 
-comment on nena.mile_marker.id as 'Primary Key';
-comment on nena.mile_marker.discrpagid as 'Discrepancy Agency ID';
-comment on nena.mile_marker.dateupdate as 'Date Updated';
-comment on nena.mile_marker.milemnguid as 'Mile Post NENA Globally Unique ID';
-comment on nena.mile_marker.milem_unit as 'Mile Post Unit of Measurement';
-comment on nena.mile_marker.milemvalue as 'Mile Post Measurement Value';
-comment on nena.mile_marker.milem_rte as 'Mile Post Route Name';
-comment on nena.mile_marker.milem_type as 'Mile Post Type';
-comment on nena.mile_marker.milem_ind as 'Mile POst Indicator';
-
-
+comment on column nena.mile_marker.id is 'Primary Key';
+comment on column nena.mile_marker.discrpagid is 'Discrepancy Agency ID';
+comment on column nena.mile_marker.dateupdate is 'Date Updated';
+comment on column nena.mile_marker.milemnguid is 'Mile Post NENA Globally Unique ID';
+comment on column nena.mile_marker.milem_unit is 'Mile Post Unit of Measurement';
+comment on column nena.mile_marker.milemvalue is 'Mile Post Measurement Value';
+comment on column nena.mile_marker.milem_rte is 'Mile Post Route Name';
+comment on column nena.mile_marker.milem_type is 'Mile Post Type';
+comment on column nena.mile_marker.milem_ind is 'Mile POst Indicator';
 
